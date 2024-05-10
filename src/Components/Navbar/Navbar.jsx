@@ -1,7 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
-
     const navlink = <>
         <NavLink to={"/"} className={'mx-3 textl font-semibold'}>Home</NavLink>
         <NavLink to={"/addBlog"} className={'mx-3 textl font-semibold'}>Add Blog</NavLink>
@@ -38,7 +37,7 @@ const Navbar = () => {
         </div>
         <div className="flex">
           <button className="rounded-xl btn-ghost text-sm lg:text-2xl font-bold text-left">
-          <span>Tech</span>TALKS
+          <span className="text-[#805aed]">Tech</span>TALKS
           </button>
         </div>
       </div>
@@ -53,13 +52,16 @@ const Navbar = () => {
                 {/* <img title={user.displayName} src={user.photoURL} /> */}
               </div>
             </div>
-            <button onClick='' className="btn text-white h-8 min-h-0 lg:h-12 lg:min-h-12 lg:px-4 px-2">
+            <button onClick='' className="btn bg-[#805aed] text-white h-8 min-h-0 lg:h-12 lg:min-h-12 lg:px-4 px-2">
               Logout
             </button>
           </div>
         {/* ) : ( */}
           <Link to="/login">
-            <button className="btn text-white h-8 min-h-0 lg:h-12 lg:min-h-12 lg:px-4 px-2">Login</button>
+            <button className="btn bg-[#805aed] text-white h-8 min-h-0 lg:h-12 lg:min-h-12 lg:px-4 px-2">Login</button>
+          </Link>
+          <Link to="/register">
+            <button className="btn bg-[#805aed] text-white h-8 min-h-0 lg:h-12 lg:min-h-12 lg:px-4 px-2">Registration</button>
           </Link>
         {/* )} */}
       </div>

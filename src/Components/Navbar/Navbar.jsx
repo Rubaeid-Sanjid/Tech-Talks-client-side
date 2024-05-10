@@ -62,7 +62,7 @@ const Navbar = () => {
           <div className="flex gap-2 items-center">
             <div className="avatar">
               <div className="w-10 lg:w-16 rounded-full">
-                {/* <img title={user.displayName} src={user.photoURL} /> */}
+                <img title={user.displayName} src={user.photoURL} />
               </div>
             </div>
             <button onClick={handleLogout} className="btn bg-[#805aed] text-white h-8 min-h-0 lg:h-12 lg:min-h-12 lg:px-4 px-2">

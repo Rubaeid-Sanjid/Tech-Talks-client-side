@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Navbar = () => {
+  const {user} = useContext(AuthContext);
+  
     const navlink = <>
         <NavLink to={"/"} className={'mx-3 textl font-semibold'}>Home</NavLink>
         <NavLink to={"/addBlog"} className={'mx-3 textl font-semibold'}>Add Blog</NavLink>
@@ -45,7 +49,7 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1 gap-4">{navlink}</ul>
       </div>
       <div className="navbar-end">
-        {/* {user ? ( */}
+        {user ? (
           <div className="flex gap-2 items-center">
             <div className="avatar">
               <div className="w-10 lg:w-16 rounded-full">
@@ -56,14 +60,17 @@ const Navbar = () => {
               Logout
             </button>
           </div>
-        {/* ) : ( */}
-          <Link to="/login">
-            <button className="btn bg-[#805aed] text-white h-8 min-h-0 lg:h-12 lg:min-h-12 lg:px-4 px-2">Login</button>
-          </Link>
-          <Link to="/register">
-            <button className="btn bg-[#805aed] text-white h-8 min-h-0 lg:h-12 lg:min-h-12 lg:px-4 px-2">Registration</button>
-          </Link>
-        {/* )} */}
+        ) : (
+          <div>
+            <Link to="/login">
+              <button className="btn bg-[#805aed] text-white h-8 min-h-0 lg:h-12 lg:min-h-12 lg:px-4 px-2">Login</button>
+            </Link>
+            <Link to="/register">
+              <button className="btn bg-[#805aed] text-white h-8 min-h-0 lg:h-12 lg:min-h-12 lg:px-4 px-2">Registration</button>
+            </Link>
+          </div>
+        )
+        }
       </div>
     </div>
   );

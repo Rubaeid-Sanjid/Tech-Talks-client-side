@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import loginImg from "../../assets/images/Login.jpg" 
 import { useContext } from "react";
 import { AuthContext } from "../../Components/AuthProvider/AuthProvider";
 
 const Login = () => {
-
+const navigate = useNavigate();
     const {loginUser} = useContext(AuthContext);
 
     const handleLogin = (e)=>{
@@ -16,6 +16,7 @@ const Login = () => {
         loginUser(email, password)
         .then(result=>{
             console.log(result.user);
+            navigate('/');
         })
         .catch(error =>{
             console.log(error.message);

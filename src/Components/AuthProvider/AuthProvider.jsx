@@ -1,43 +1,47 @@
-import PropTypes from 'prop-types';
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import PropTypes from "prop-types";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../Firebase/firebaseConfig";
 
 export const AuthContext = createContext();
 
-const AuthProvider = ({children}) => {
-    const [user, setUser] = useState([]);
+const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState([]);
 
-    const createUser = (email, password)=>{
-        return createUserWithEmailAndPassword(auth, email, password);
-    }
-    const loginUser = (email, password)=>{
-        return signInWithEmailAndPassword(auth, email, password);
-    }
+  const createUser = (email, password) => {
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
+  const loginUser = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+  const logOutUser = () => {
+    return signOut(auth);
+  };
 
-    useEffect(()=>{
-        const unSubscribe = onAuthStateChanged(auth, (currentUser)=>{
-            if(currentUser){
-                setUser(currentUser);
-            }
-        })
+  useEffect(() => {
+    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
 
-        return ()=>{
-            unSubscribe();
-        }
-    }, [])
+    return () => {
+      unSubscribe();
+    };
+  }, []);
 
-    const authInfo = {user, createUser, loginUser};
+  const authInfo = { user, createUser, loginUser, logOutUser };
 
-    return (
-        <AuthContext.Provider value={authInfo}>
-            {children}
-        </AuthContext.Provider>
-    );
+  return (
+    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+  );
 };
 
 AuthProvider.propTypes = {
-    children: PropTypes.node,
+  children: PropTypes.node,
 };
 
 export default AuthProvider;

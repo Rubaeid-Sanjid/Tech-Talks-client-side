@@ -3,7 +3,16 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Navbar = () => {
-  const {user} = useContext(AuthContext);
+  const {user, logOutUser} = useContext(AuthContext);
+
+  const handleLogout = ()=>{
+    logOutUser()
+    .then(() => {
+      
+    }).catch((error) => {
+      console.log(error.message);
+    });
+  }
   
     const navlink = <>
         <NavLink to={"/"} className={'mx-3 textl font-semibold'}>Home</NavLink>
@@ -56,12 +65,12 @@ const Navbar = () => {
                 {/* <img title={user.displayName} src={user.photoURL} /> */}
               </div>
             </div>
-            <button onClick='' className="btn bg-[#805aed] text-white h-8 min-h-0 lg:h-12 lg:min-h-12 lg:px-4 px-2">
+            <button onClick={handleLogout} className="btn bg-[#805aed] text-white h-8 min-h-0 lg:h-12 lg:min-h-12 lg:px-4 px-2">
               Logout
             </button>
           </div>
         ) : (
-          <div>
+          <div className="flex flex-col lg:flex-row gap-2">
             <Link to="/login">
               <button className="btn bg-[#805aed] text-white h-8 min-h-0 lg:h-12 lg:min-h-12 lg:px-4 px-2">Login</button>
             </Link>

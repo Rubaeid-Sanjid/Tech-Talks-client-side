@@ -1,7 +1,30 @@
 import { Link } from "react-router-dom";
 import signUpImg from "../../assets/images/SignUp.jpg" 
+import { useContext } from "react";
+import { AuthContext } from "../../Components/AuthProvider/AuthProvider";
 
 const Register = () => {
+
+    const {createUser} = useContext(AuthContext);
+
+    const handleRegister = (e)=>{
+        e.preventDefault();
+
+        const name = e.target.name.value;
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+
+        console.log(name, email, password);
+
+        createUser(email, password)
+        .then(result=>{
+            console.log(result.user);
+        })
+        .catch(error =>{
+            console.log(error.message);
+        })
+    }
+
     return (
       <div className="hero min-h-screen my-8">
         <div className="hero-content">
@@ -9,7 +32,7 @@ const Register = () => {
             <img className="w-4/5" src={signUpImg} alt="" />
           </div>
           <div className="card shrink-0 w-1/2 max-w-sm shadow-2xl bg-base-100">
-            <form onSubmit='' className="card-body">
+            <form onSubmit={handleRegister} className="card-body">
               <h1 className="text-3xl lg:text-5xl font-bold text-center">
               Register Now
               </h1>

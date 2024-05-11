@@ -75,7 +75,7 @@ const Navbar = () => {
               <button className="btn bg-[#805aed] text-white h-8 min-h-0 lg:h-12 lg:min-h-12 lg:px-4 px-2">Login</button>
             </Link>
             <Link to="/register">
-              <button className="btn bg-[#805aed] text-white h-8 min-h-0 lg:h-12 lg:min-h-12 lg:px-4 px-2">Registration</button>
+              <button className="btn bg-[#805aed] text-white h-8 min-h-0 lg:h-12 lg:min-h-12 lg:px-4 px-2">Register</button>
             </Link>
           </div>
         )

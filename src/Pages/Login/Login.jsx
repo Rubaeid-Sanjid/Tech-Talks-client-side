@@ -3,10 +3,14 @@ import loginImg from "../../assets/images/Login.jpg"
 import { useContext } from "react";
 import { AuthContext } from "../../Components/AuthProvider/AuthProvider";
 import googleLogo from "../../assets/images/google-logo-image.png"
+import { useToast } from "@chakra-ui/react";
+import axios from "axios";
 
 const Login = () => {
 const navigate = useNavigate();
     const {loginUser, googleLogin} = useContext(AuthContext);
+
+    const toast = useToast()
 
     const handleLogin = (e)=>{
         e.preventDefault();
@@ -17,10 +21,24 @@ const navigate = useNavigate();
         loginUser(email, password)
         .then(result=>{
             console.log(result.user);
-            navigate('/');
+
+            const user = { email };           
+            // navigate('/');
+            axios.post('http://localhost:5000/jwt', user, {withCredentials: true})
+            .then(res =>{
+              console.log(res.data);
+            })
         })
         .catch(error =>{
             console.log(error.message);
+            toast({
+              title: 'Failed to login.',
+              description: "Sorry! We've failed to log you in.",
+              position: 'top',
+              status: 'error',
+              duration: 5000,
+              isClosable: true,
+            })
         })
     }
 
@@ -32,6 +50,14 @@ const navigate = useNavigate();
           })
           .catch((error) => {
             console.log(error.message);
+            toast({
+              title: 'Failed to login.',
+              description: "Sorry! We've failed to log you in.",
+              position: 'top',
+              status: 'error',
+              duration: 5000,
+              isClosable: true,
+            })
           });
       };
 

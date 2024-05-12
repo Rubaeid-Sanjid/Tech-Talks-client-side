@@ -59,6 +59,14 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         console.log(result.user);
+        toast({
+          title: 'Account created.',
+          description: "We've created your account for you.",
+          position: 'top',
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+        })
       })
       .catch((error) => {
         console.log(error.message);

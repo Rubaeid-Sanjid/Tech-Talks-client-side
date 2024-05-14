@@ -1,20 +1,23 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const Blog = ({ blog }) => {
-  const {title} = blog;
+  const {title, image, short_description, category} = blog;
     return (
     <div className="card card-compact bg-base-100 shadow-xl">
       <figure>
         <img
-          src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-          alt="Shoes"
+          src={image}
+          alt=""
         />
       </figure>
       <div className="card-body">
         <h2 className="card-title">{title}</h2>
-        <p>If a dog chews shoes whose shoes does he choose?</p>
+        <p>{short_description}</p>
+        <div className="badge badge-outline">{category}</div>
         <div className="card-actions justify-end">
-          <button className="btn btn-primary">Buy Now</button>
+          <Link><button className="btn bg-[#805aed] text-white">Details</button></Link>
+          <Link><button className="btn bg-[#805aed] text-white">Wishlist</button></Link>
         </div>
       </div>
     </div>

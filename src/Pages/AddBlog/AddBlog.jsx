@@ -1,5 +1,6 @@
 "use client";
 
+import axios from "axios";
 import { Select } from "flowbite-react";
 
 const AddBlog = () => {
@@ -20,7 +21,15 @@ const AddBlog = () => {
       short_description: short_description,
       long_description: long_description,
     };
+
     console.log(blogInfo);
+    axios.post('http://localhost:5000/addBlog', blogInfo)
+    .then(response => {
+      console.log(response.data);
+    })
+    .catch(error => {
+      console.error(error);
+    });
   };
 
   return (

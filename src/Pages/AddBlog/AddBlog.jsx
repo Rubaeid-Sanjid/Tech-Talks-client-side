@@ -23,7 +23,7 @@ const AddBlog = () => {
       long_description: long_description,
     };
 
-    axios.post('http://localhost:5000/addBlog', blogInfo)
+    axios.post('http://localhost:5000/blogs', blogInfo)
     .then(response => {
       console.log(response.data);
       if(response.data.insertedId){

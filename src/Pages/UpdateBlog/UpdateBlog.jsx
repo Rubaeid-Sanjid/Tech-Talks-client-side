@@ -1,53 +1,19 @@
-"use client";
-
-import axios from "axios";
 import { Select } from "flowbite-react";
-import Swal from "sweetalert2";
 
-const AddBlog = () => {
+const UpdateBlog = () => {
 
-  const handleBlog = (e) => {
-    e.preventDefault();
-
-    const title = e.target.title.value;
-    const image = e.target.image.value;
-    const category = e.target.category.value;
-    const short_description = e.target.short_description.value;
-    const long_description = e.target.long_description.value;
-
-    const blogInfo = {
-      title: title,
-      image: image,
-      category: category,
-      short_description: short_description,
-      long_description: long_description,
-    };
-
-    axios.post('http://localhost:5000/addBlog', blogInfo)
-    .then(response => {
-      console.log(response.data);
-      if(response.data.insertedId){
-        Swal.fire({
-          title: "Good job!",
-          text: "Item added successfully!",
-          icon: "success"
-        });
-        e.target.reset();
-      }
-    })
-    .catch(error => {
-      console.error(error);
-    });
-  };
-
-  return (
-    <div className="hero min-h-screen mt-8">
+    const handleUpdateBlog =(e)=>{
+        e.preventDefault();
+    }
+    
+    return (
+        <div className="hero min-h-screen mt-8">
       <div className="hero-content flex-col lg:w-3/4">
         <div className="text-center lg:text-left">
-          <h1 className="text-3xl lg:text-5xl font-semibold">Add Blog</h1>
+          <h1 className="text-3xl lg:text-5xl font-semibold">Update Blog</h1>
         </div>
         <div className="card shrink-0 lg:w-full shadow-2xl bg-base-100">
-          <form onSubmit={handleBlog} className="card-body lg:grid grid-cols-2">
+          <form onSubmit={handleUpdateBlog} className="card-body lg:grid grid-cols-2">
             <div className="form-control">
               <label className="label">
                 <span className="text-lg font-medium">Title</span>
@@ -126,7 +92,7 @@ const AddBlog = () => {
         </div>
       </div>
     </div>
-  );
+    );
 };
 
-export default AddBlog;
+export default UpdateBlog;

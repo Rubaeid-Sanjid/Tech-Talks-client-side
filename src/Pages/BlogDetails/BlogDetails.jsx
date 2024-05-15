@@ -1,19 +1,42 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../Components/AuthProvider/AuthProvider";
+import axios from "axios";
 
 const BlogDetails = () => {
   const blog = useLoaderData();
   const { user } = useContext(AuthContext);
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
+  const [commentInfo, setCommentInfo] = useState([]);
 
-  const { title, image, short_description, category, long_description } = blog;
+  const { _id, title, image, short_description, category, long_description } =
+    blog;
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/comments/${_id}`)
+      .then((res) => setCommentInfo(res.data));
+  }, [_id]);
 
   const handleComment = (e) => {
     e.preventDefault();
     setComment(e.target.comment.value);
+    e.target.reset();
 
     console.log(comment, user.email);
+    const commentInfo = {
+      blog_Id: _id,
+      name: user.displayName,
+      photo: user.photoURL,
+      comment,
+    };
+
+    axios
+      .post("http://localhost:5000/comments", commentInfo)
+      .then((res) => console.log(res.data))
+      .catch((error) => {
+        console.error(error);
+      });
   };
   return (
     <div className="container mx-auto px-3 lg:px-12 lg:my-12 my-6">
@@ -49,20 +72,21 @@ const BlogDetails = () => {
           </div>
         </form>
 
-        <h2 className="card-title text-3xl mb-5 mt-8">
-          Comments
-        </h2>
-        <div className="border-t-2 py-8">
-          <div className="avatar">
-            <div className="w-16 rounded-full">
-              <img src={user.photoURL} />
+        <h2 className="card-title text-3xl mb-5 mt-8">Comments</h2>
+        {commentInfo &&
+          commentInfo.map((curr_comment) => (
+            <div key={curr_comment._id} className="border-t-2 py-8">
+              <div className="avatar">
+                <div className="w-16 rounded-full">
+                  <img src={curr_comment.photo} />
+                </div>
+                <div className="flex flex-col gap-3 ml-4">
+                  <h3 className="text-lg font-bold">{curr_comment.name}</h3>
+                  <h4>{curr_comment.comment}</h4>
+                </div>
+              </div>
             </div>
-            <div className="flex flex-col gap-3 ml-4">
-            <h3 className="text-lg font-bold">{user.displayName}</h3>
-            <h4>{comment}</h4>
-            </div>
-          </div>
-        </div>
+          ))}
       </div>
     </div>
   );

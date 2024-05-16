@@ -35,7 +35,7 @@ const UpdateBlog = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .patch(`http://localhost:5000/blogs/${_id}`, updated_blogInfo)
+          .patch(`http://localhost:5000/blogs/${_id}`, updated_blogInfo, { withCredentials: true })
           .then((res) => {
             console.log(res.data);
             if (res.data.modifiedCount > 0) {

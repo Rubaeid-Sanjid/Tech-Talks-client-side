@@ -21,7 +21,7 @@ const BlogDetails = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/comments/${_id}`)
+      .get(`http://localhost:5000/comments/${_id}`, { withCredentials: true })
       .then((res) => {setCommentInfo(res.data)
       });
   }, []);

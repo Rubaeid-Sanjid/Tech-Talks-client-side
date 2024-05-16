@@ -5,68 +5,77 @@ import { AuthContext } from "../../Components/AuthProvider/AuthProvider";
 import { useToast } from "@chakra-ui/react";
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext);
-  const toast = useToast()
+  const { createUser, setUserProfile } = useContext(AuthContext);
+  const toast = useToast();
 
   const handleRegister = (e) => {
     e.preventDefault();
 
-    // const name = e.target.name.value;
+    const name = e.target.name.value;
+    const photo = e.target.photo.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
 
     if (password.length < 6) {
       toast({
-        title: 'Password is less than 6 characters',
-        position: 'top',
-        status: 'error',
+        title: "Password is less than 6 characters",
+        position: "top",
+        status: "error",
         duration: 5000,
         isClosable: true,
-      })
+      });
       return;
     }
     if (!/[A-Z]/.test(password)) {
       toast({
-        title: 'Password must have an Uppercase letter.',
-        position: 'top',
-        status: 'error',
+        title: "Password must have an Uppercase letter.",
+        position: "top",
+        status: "error",
         duration: 5000,
         isClosable: true,
-      })
+      });
       return;
     }
     if (!/.*\d.*/.test(password)) {
       toast({
         title: "Password must contain a numeric character.",
-        position: 'top',
-        status: 'error',
+        position: "top",
+        status: "error",
         duration: 5000,
         isClosable: true,
-      })
+      });
       return;
     }
     if (!/[$@!%#*&<>^()]/.test(password)) {
       toast({
         title: "Password must have a special character.",
-        position: 'top',
-        status: 'error',
+        position: "top",
+        status: "error",
         duration: 5000,
         isClosable: true,
-      })
+      });
       return;
     }
 
     createUser(email, password)
       .then((result) => {
         console.log(result.user);
+
+        setUserProfile({
+          displayName: name,
+          photoURL: photo,
+        })
+          .then((result) => console.log(result.user))
+          .catch((error) => console.log(error.message));
+
         toast({
-          title: 'Account created.',
-          description: "We've created your account for you.",
-          position: 'top',
-          status: 'success',
+          title: "Account created.",
+          description: "We've created account for you.",
+          position: "top",
+          status: "success",
           duration: 5000,
           isClosable: true,
-        })
+        });
       })
       .catch((error) => {
         console.log(error.message);
@@ -92,6 +101,18 @@ const Register = () => {
                 type="text"
                 name="name"
                 placeholder="name"
+                className="input input-bordered"
+                required
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Photo URL</span>
+              </label>
+              <input
+                type="text"
+                name="photo"
+                placeholder="image url"
                 className="input input-bordered"
                 required
               />

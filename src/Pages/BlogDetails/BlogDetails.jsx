@@ -57,12 +57,16 @@ const BlogDetails = () => {
           <div className="badge badge-outline p-3 mt-3">
             <span>Category:</span> {category}
           </div>
-          <h3 className="my-6">{long_description}</h3>
+          <h3 className="mt-6">{long_description}</h3>
         </div>
         <div className="flex justify-end my-3 px-3 lg:px-12">
-          {
-            (bloger_email === user.email) && <Link><button className="btn bg-[#805aed] text-white">Update Blog</button></Link>
-          }       
+          {bloger_email === user.email && (
+            <Link>
+              <button className="btn bg-[#805aed] text-white btn-sm lg:btn-md">
+                Update Blog
+              </button>
+            </Link>
+          )}
         </div>
       </div>
 

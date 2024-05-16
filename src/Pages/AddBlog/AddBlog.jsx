@@ -2,10 +2,12 @@
 
 import axios from "axios";
 import { Select } from "flowbite-react";
+import { useContext } from "react";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../Components/AuthProvider/AuthProvider";
 
 const AddBlog = () => {
-
+  const {user} = useContext(AuthContext);
   const handleBlog = (e) => {
     e.preventDefault();
 
@@ -21,6 +23,7 @@ const AddBlog = () => {
       category: category,
       short_description: short_description,
       long_description: long_description,
+      bloger_email: user.email
     };
 
     axios.post('http://localhost:5000/blogs', blogInfo)
@@ -29,7 +32,7 @@ const AddBlog = () => {
       if(response.data.insertedId){
         Swal.fire({
           title: "Good job!",
-          text: "Item added successfully!",
+          text: "Blog posted successfully!",
           icon: "success"
         });
         e.target.reset();

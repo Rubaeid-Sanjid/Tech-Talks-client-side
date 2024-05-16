@@ -22,7 +22,8 @@ const BlogDetails = () => {
   useEffect(() => {
     axios
       .get(`http://localhost:5000/comments/${_id}`)
-      .then((res) => setCommentInfo(res.data));
+      .then((res) => {setCommentInfo(res.data)
+      });
   }, []);
 
   const handleComment = (e) => {
@@ -65,7 +66,7 @@ const BlogDetails = () => {
         </div>
         <div className="flex justify-end my-3 px-3 lg:px-12">
           {bloger_email === user.email && (
-            <Link>
+            <Link to={`/updateBlog/${_id}`}>
               <button className="btn bg-[#805aed] text-white btn-sm lg:btn-md">
                 Update Blog
               </button>

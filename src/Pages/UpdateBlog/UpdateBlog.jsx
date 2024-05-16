@@ -1,19 +1,67 @@
+import axios from "axios";
 import { Select } from "flowbite-react";
+import { useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const UpdateBlog = () => {
+  const curr_blog = useLoaderData();
 
-    const handleUpdateBlog =(e)=>{
-        e.preventDefault();
-    }
-    
-    return (
-        <div className="hero min-h-screen mt-8">
+  const { _id, title, image, category, short_description, long_description } =
+    curr_blog;
+
+  const handleUpdateBlog = (e) => {
+    e.preventDefault();
+
+    const updated_title = e.target.title.value;
+    const updated_image = e.target.image.value;
+    const updated_category = e.target.category.value;
+    const updated_short_description = e.target.short_description.value;
+    const updated_long_description = e.target.long_description.value;
+
+    const updated_blogInfo = {
+      updated_title,
+      updated_image,
+      updated_category,
+      updated_short_description,
+      updated_long_description,
+    };
+
+    Swal.fire({
+      title: "Do you want to save the changes?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Save",
+      denyButtonText: `Don't save`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .patch(`http://localhost:5000/blogs/${_id}`, updated_blogInfo)
+          .then((res) => {
+            console.log(res.data);
+            if (res.data.modifiedCount > 0) {
+              Swal.fire("Saved!", "", "success");
+              e.target.reset();
+            }
+          });
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
+      }
+    });
+  };
+
+  return (
+    <div className="hero min-h-screen mt-8">
       <div className="hero-content flex-col lg:w-3/4">
         <div className="text-center lg:text-left">
-          <h1 className="text-3xl lg:text-5xl font-semibold">Update Blog</h1>
+          <h1 className="text-3xl lg:text-5xl font-semibold">
+            Update Your Blog
+          </h1>
         </div>
         <div className="card shrink-0 lg:w-full shadow-2xl bg-base-100">
-          <form onSubmit={handleUpdateBlog} className="card-body lg:grid grid-cols-2">
+          <form
+            onSubmit={handleUpdateBlog}
+            className="card-body lg:grid grid-cols-2"
+          >
             <div className="form-control">
               <label className="label">
                 <span className="text-lg font-medium">Title</span>
@@ -22,6 +70,7 @@ const UpdateBlog = () => {
                 type="text"
                 placeholder="title"
                 name="title"
+                defaultValue={title}
                 className="input input-bordered"
                 required
               />
@@ -35,6 +84,7 @@ const UpdateBlog = () => {
                 type="text"
                 placeholder="image URL"
                 name="image"
+                defaultValue={image}
                 className="input input-bordered"
                 required
               />
@@ -44,8 +94,13 @@ const UpdateBlog = () => {
               <label className="label">
                 <span className="text-lg font-medium">Category</span>
               </label>
-        
-              <Select id="category" required name="category">
+
+              <Select
+                id="category"
+                required
+                name="category"
+                defaultValue={category}
+              >
                 <option>Artificial Intelligence</option>
                 <option>Virtual Reality</option>
                 <option>Blockchain</option>
@@ -62,6 +117,7 @@ const UpdateBlog = () => {
               <textarea
                 className="border p-3 rounded-xl"
                 name="short_description"
+                defaultValue={short_description}
                 id=""
                 cols="10"
                 rows="2"
@@ -76,6 +132,7 @@ const UpdateBlog = () => {
               <textarea
                 className="border p-3 rounded-xl"
                 name="long_description"
+                defaultValue={long_description}
                 id=""
                 cols="10"
                 rows="5"
@@ -92,7 +149,7 @@ const UpdateBlog = () => {
         </div>
       </div>
     </div>
-    );
+  );
 };
 
 export default UpdateBlog;

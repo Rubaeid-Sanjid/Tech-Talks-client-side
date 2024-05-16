@@ -47,7 +47,7 @@ const AddBlog = () => {
     <div className="hero min-h-screen mt-8">
       <div className="hero-content flex-col lg:w-3/4">
         <div className="text-center lg:text-left">
-          <h1 className="text-3xl lg:text-5xl font-semibold">Add Blog</h1>
+          <h1 className="text-3xl lg:text-5xl font-semibold">Post Your Blog</h1>
         </div>
         <div className="card shrink-0 lg:w-full shadow-2xl bg-base-100">
           <form onSubmit={handleBlog} className="card-body lg:grid grid-cols-2">

@@ -23,27 +23,31 @@ const BlogDetails = () => {
     axios
       .get(`http://localhost:5000/comments/${_id}`)
       .then((res) => setCommentInfo(res.data));
-  }, [_id]);
+  }, []);
 
   const handleComment = (e) => {
     e.preventDefault();
-    setComment(e.target.comment.value);
-    e.target.reset();
+    const newComment = e.target.comment.value;
 
     console.log(comment, user.email);
     const commentDoc = {
       blog_Id: _id,
       name: user.displayName,
       photo: user.photoURL,
-      comment,
+      comment: newComment,
     };
 
     axios
       .post("http://localhost:5000/comments", commentDoc)
-      .then((res) => console.log(res.data))
+      .then((res) => {
+        console.log(res.data);
+        setComment(newComment);
+      })
       .catch((error) => {
         console.error(error);
       });
+
+    e.target.reset();
   };
   return (
     <div className="container mx-auto px-3 lg:px-12 lg:my-12 my-6">

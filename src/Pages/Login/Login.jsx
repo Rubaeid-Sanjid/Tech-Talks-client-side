@@ -23,7 +23,7 @@ const navigate = useNavigate();
             console.log(result.user);
 
             const user = { email };           
-            // navigate('/');
+            navigate('/');
             axios.post('http://localhost:5000/jwt', user, {withCredentials: true})
             .then(res =>{
               console.log(res.data);

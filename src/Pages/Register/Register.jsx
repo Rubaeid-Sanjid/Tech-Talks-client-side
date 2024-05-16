@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import signUpImg from "../../assets/images/SignUp.jpg";
 import { useContext } from "react";
 import { AuthContext } from "../../Components/AuthProvider/AuthProvider";
@@ -7,6 +7,7 @@ import { useToast } from "@chakra-ui/react";
 const Register = () => {
   const { createUser, setUserProfile } = useContext(AuthContext);
   const toast = useToast();
+  const navigate = useNavigate();
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -76,6 +77,7 @@ const Register = () => {
           duration: 5000,
           isClosable: true,
         });
+        navigate('/login');
       })
       .catch((error) => {
         console.log(error.message);

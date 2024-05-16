@@ -3,6 +3,7 @@ import signUpImg from "../../assets/images/SignUp.jpg";
 import { useContext } from "react";
 import { AuthContext } from "../../Components/AuthProvider/AuthProvider";
 import { useToast } from "@chakra-ui/react";
+import axios from "axios";
 
 const Register = () => {
   const { createUser, setUserProfile } = useContext(AuthContext);
@@ -61,12 +62,22 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         console.log(result.user);
-
+        axios
+          .post(
+            "http://localhost:5000/jwt",
+            { email: result?.user?.email },
+            { withCredentials: true }
+          )
+          .then((res) => {
+            console.log(res.data);
+          });
         setUserProfile({
           displayName: name,
           photoURL: photo,
         })
-          .then((result) => console.log(result.user))
+          .then((result) => {
+            console.log(result.user);
+          })
           .catch((error) => console.log(error.message));
 
         toast({
@@ -77,7 +88,7 @@ const Register = () => {
           duration: 5000,
           isClosable: true,
         });
-        navigate('/login');
+        navigate("/login");
       })
       .catch((error) => {
         console.log(error.message);

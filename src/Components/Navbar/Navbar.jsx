@@ -49,7 +49,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="flex">
-          <button className="rounded-xl btn-ghost text-lg lg:text-2xl font-bold text-left">
+          <button className="rounded-xl btn-ghost text-lg lg:text-3xl font-bold text-left">
           <span className="text-[#805aed]">Tech</span>TALKS
           </button>
         </div>

@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 const Newsletter = () => {
   const handleSubscription = (e) => {
     e.preventDefault();
-    
+
     Swal.fire({
       position: "top",
       icon: "success",
@@ -13,8 +13,8 @@ const Newsletter = () => {
     });
   };
   return (
-    <div className="bg-gradient-to-r from-[#7af6d0] to-[#b2f8e3] py-14 mt-8 lg:my-12">
-      <div className="container mx-auto lg:px-12 px-3 flex items-center">
+    <div className="bg-gradient-to-r from-[#7af6d0] to-[#b2f8e3] py-14 mt-8 lg:mt-12">
+      <div className="container mx-auto lg:px-12 px-3 flex flex-col lg:flex-row gap-6 lg:gap-0 items-center">
         <div className="flex-1">
           <h2 className="text-3xl lg:text-5xl font-bold mb-5">
             Sign up for Newsletter
@@ -22,8 +22,8 @@ const Newsletter = () => {
           <p>Subscribe to Our Newsletter for the Latest Tech News</p>
         </div>
 
-        <div className="flex-1">
-          <form onSubmit={handleSubscription} className="flex justify-end gap-2">
+        <div className="flex-1 w-full lg:w-0">
+          <form onSubmit={handleSubscription} className="flex justify-end gap-2 flex-col lg:flex-row">
             <input
               type="email"
               placeholder="Email"

@@ -6,7 +6,7 @@ import axios from "axios";
 const BlogDetails = () => {
   const blog = useLoaderData();
   const { user } = useContext(AuthContext);
-  const [comment, setComment] = useState("");
+  // const [comment, setComment] = useState("");
   const [commentInfo, setCommentInfo] = useState([]);
 
   const {
@@ -24,13 +24,12 @@ const BlogDetails = () => {
       .get(`http://localhost:5000/comments/${_id}`, { withCredentials: true })
       .then((res) => {setCommentInfo(res.data)
       });
-  }, []);
+  }, [_id, commentInfo]);
 
   const handleComment = (e) => {
     e.preventDefault();
     const newComment = e.target.comment.value;
 
-    console.log(comment, user.email);
     const commentDoc = {
       blog_Id: _id,
       name: user.displayName,
@@ -42,7 +41,7 @@ const BlogDetails = () => {
       .post("http://localhost:5000/comments", commentDoc)
       .then((res) => {
         console.log(res.data);
-        setComment(newComment);
+        // setComment(newComment);
       })
       .catch((error) => {
         console.error(error);
@@ -104,7 +103,7 @@ const BlogDetails = () => {
           commentInfo.map((curr_comment) => (
             <div key={curr_comment._id} className="border-t-2 py-8">
               <div className="avatar">
-                <div className="w-16 rounded-full">
+                <div className="h-16 w-16 rounded-full">
                   <img src={curr_comment.photo} />
                 </div>
                 <div className="flex flex-col gap-3 ml-4">

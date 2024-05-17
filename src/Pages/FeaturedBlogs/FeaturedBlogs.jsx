@@ -35,7 +35,7 @@ const FeaturedBlogs = () => {
               <th>{idx + 1}</th>
               <td>{blog.title}</td>
               <td>{blog.bloger_email}</td>
-              <td><img src={blog.bloger_photo} alt="" className="w-16 rounded-full" /></td>
+              <td><img src={blog.bloger_photo} alt="" className="h-16 w-16 rounded-full" /></td>
             </tr>
           ))}
         </tbody>

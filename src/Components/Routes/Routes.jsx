@@ -9,6 +9,7 @@ import BlogDetails from "../../Pages/BlogDetails/BlogDetails";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import UpdateBlog from "../../Pages/UpdateBlog/UpdateBlog";
 import AllBlogs from "../../Pages/AllBlogs/AllBlogs";
+import FeaturedBlogs from "../../Pages/FeaturedBlogs/FeaturedBlogs";
 
 const router = createBrowserRouter([
   {
@@ -63,8 +64,14 @@ const router = createBrowserRouter([
             <AllBlogs></AllBlogs>
           </PrivateRoute>
         ),
-        loader: () =>
-          fetch(`http://localhost:5000/blogs`),
+      },
+      {
+        path: "/featuredBlogs",
+        element: (
+          <PrivateRoute>
+            <FeaturedBlogs></FeaturedBlogs>
+          </PrivateRoute>
+        ),
       },
     ],
   },

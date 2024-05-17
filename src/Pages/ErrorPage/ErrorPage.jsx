@@ -12,7 +12,7 @@ const ErrorPage = () => {
         <h2 className="text-8xl font-bold">OH NO!</h2>
         <h3 className="font-semibold text-4xl text-[#805aed]">But that's okay!</h3>
       </div>
-      <Link to={'/'}><button>Go Back</button></Link>
+      <Link to={'/'}><button className="btn bg-[#805aed] text-white">Go Back</button></Link>
     </div>
   );
 };

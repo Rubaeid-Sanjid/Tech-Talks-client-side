@@ -9,7 +9,7 @@ const AllBlogs = () => {
   const [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
   const [searchText, setSearchText] = useState("");
-  const itemsPerPage = 4;
+  const itemsPerPage = 3;
 
   useEffect(() => {
     const getData = async () => {

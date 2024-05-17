@@ -6,7 +6,6 @@ import axios from "axios";
 const BlogDetails = () => {
   const blog = useLoaderData();
   const { user } = useContext(AuthContext);
-  // const [comment, setComment] = useState("");
   const [commentInfo, setCommentInfo] = useState([]);
 
   const {
@@ -41,7 +40,6 @@ const BlogDetails = () => {
       .post("http://localhost:5000/comments", commentDoc)
       .then((res) => {
         console.log(res.data);
-        // setComment(newComment);
       })
       .catch((error) => {
         console.error(error);

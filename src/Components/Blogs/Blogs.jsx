@@ -18,7 +18,7 @@ const Blogs = () => {
         Explore Our Blog for In-Depth Articles, Expert Opinions, and the Latest
         Updates in the World of Technology. Stay Informed, Stay Ahead.
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 lg:mt-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 lg:my-12">
         {blogs.map((blog) => (
           <Blog key={blog._id} blog={blog}></Blog>
         ))}

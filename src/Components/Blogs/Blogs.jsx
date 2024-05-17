@@ -8,7 +8,7 @@ const Blogs = () => {
         fetch('http://localhost:5000/blogs')
         .then(res=> res.json())
         .then(data=>{
-            setBlogs(data)
+            setBlogs(data.blogs)
         })
     },[])
     return (
@@ -24,3 +24,4 @@ const Blogs = () => {
 };
 
 export default Blogs;
+

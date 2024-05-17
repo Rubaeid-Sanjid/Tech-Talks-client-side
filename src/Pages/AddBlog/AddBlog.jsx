@@ -23,7 +23,8 @@ const AddBlog = () => {
       category: category,
       short_description: short_description,
       long_description: long_description,
-      bloger_email: user.email
+      bloger_email: user.email,
+      bloger_photo: user.photoURL
     };
 
     axios.post('http://localhost:5000/blogs', blogInfo)

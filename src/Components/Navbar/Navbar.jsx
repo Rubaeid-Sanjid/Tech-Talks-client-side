@@ -22,7 +22,7 @@ const Navbar = () => {
         <NavLink to={"/wishlist"} className={'mx-3 textl font-semibold'}>Wishlist</NavLink>     
     </>
   return (
-    <div className="navbar lg:px-16 py-3">
+    <div className="navbar lg:px-16 py-6">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -49,7 +49,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="flex">
-          <button className="rounded-xl btn-ghost text-sm lg:text-2xl font-bold text-left">
+          <button className="rounded-xl btn-ghost text-lg lg:text-2xl font-bold text-left">
           <span className="text-[#805aed]">Tech</span>TALKS
           </button>
         </div>

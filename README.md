@@ -3,7 +3,7 @@
 Live Site Link: https://tech-talks-auth.web.app
 
 ## About:
-This is a technology-related blogging website. It helps everyone by giving them a proper knowledge of technology. As a result, people can stay updated with new technologies.
+TechTALKS is a technology-related blogging website. It helps everyone by giving them a proper knowledge of technology. As a result, people can stay updated with new technologies.
 
 ## Features of website:
 1. Sign up and login
